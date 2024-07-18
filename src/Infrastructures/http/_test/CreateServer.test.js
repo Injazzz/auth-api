@@ -16,9 +16,9 @@ describe("HTTP server", () => {
     it("should response 201 and persisted user", async () => {
       // Arrange
       const requestPayload = {
-        username: "dicoding",
+        username: "kamal",
         password: "secret",
-        fullname: "Dicoding Indonesia",
+        fullname: "kamal akbar",
       };
       const server = await createServer(container);
 
@@ -28,6 +28,7 @@ describe("HTTP server", () => {
         url: "/users",
         payload: requestPayload,
       });
+      console.log("response", response);
 
       // Assert
       const responseJson = JSON.parse(response.payload);

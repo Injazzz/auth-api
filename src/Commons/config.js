@@ -23,3 +23,5 @@ const config = {
     database: process.env.PGDATABASE,
   },
 };
+
+module.exports = config;

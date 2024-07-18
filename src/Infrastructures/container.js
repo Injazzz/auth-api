@@ -55,11 +55,11 @@ container.register([
       injectType: "destructuring",
       dependencies: [
         {
-          name: UserRepository,
+          name: "UserRepository",
           internal: UserRepository.name,
         },
         {
-          name: PasswordHash,
+          name: "PasswordHash",
           internal: PasswordHash.name,
         },
       ],
