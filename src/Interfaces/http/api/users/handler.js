@@ -1,19 +1,19 @@
 const AddUserUseCase = require("../../../../Applications/use-cases/AddUserUseCase");
+const DomainErrorTranslator = require("../../../../Commons/exceptions/DomainErrorTranslator");
+const ClientError = require("../../../../Commons/exceptions/ClientError");
 
 class UsersHandler {
   constructor(container) {
     this._container = container;
 
     //bind method
-    this._postUserHandler = this.postUserHandler.bind(this);
+    this.postUserHandler = this.postUserHandler.bind(this);
   }
 
   async postUserHandler(request, h) {
     try {
-      // Ensure the use case is properly registered and obtained
       const addUserUseCase = this._container.getInstance(AddUserUseCase.name);
       const addedUser = await addUserUseCase.execute(request.payload);
-
       const response = h.response({
         status: "success",
         data: {
@@ -23,12 +23,20 @@ class UsersHandler {
       response.code(201);
       return response;
     } catch (error) {
-      // Handle errors appropriately
+      const translatedError = DomainErrorTranslator.translate(error);
+      if (translatedError instanceof ClientError) {
+        const response = h.response({
+          status: "fail",
+          message: translatedError.message,
+        });
+        response.code(translatedError.statusCode);
+        return response;
+      }
       const response = h.response({
-        status: "fail",
-        message: error.message,
+        status: "error",
+        message: "terjadi kegagalan pada server kami",
       });
-      response.code(500); // Or another appropriate status code
+      response.code(500);
       return response;
     }
   }
