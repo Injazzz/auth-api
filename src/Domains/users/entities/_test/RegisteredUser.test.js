@@ -24,7 +24,7 @@ describe("a RegisteredUser entities", () => {
 
     //Action and Asert
     expect(() => new RegisteredUser(payload)).toThrowError(
-      "REGISTERED_USER.NOT_MEET_DATA_TYPE_SPECIFICATIONS"
+      "REGISTERED_USER.NOT_MEET_DATA_TYPE_SPECIFICATION"
     );
   });
 

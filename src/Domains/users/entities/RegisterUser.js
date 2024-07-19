@@ -19,7 +19,7 @@ class RegisterUser {
       typeof fullname != "string" ||
       typeof password != "string"
     ) {
-      throw new Error("REGISTER_USER.NOT_MEET_DATA_TYPE_SPECIFICATIONS");
+      throw new Error("REGISTER_USER.NOT_MEET_DATA_TYPE_SPECIFICATION");
     }
 
     if (username.length > 50) {
@@ -27,7 +27,7 @@ class RegisterUser {
     }
 
     if (!username.match(/^[\w]+$/)) {
-      throw new Error("REGISTER_USER.USERNAME_CONTAINS_RESTRICTED_CHARACTER");
+      throw new Error("REGISTER_USER.USERNAME_CONTAIN_RESTRICTED_CHARACTER");
     }
   }
 }
